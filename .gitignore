@@ -1,0 +1,103 @@
+# ==========================================
+# ROS 2 / Colcon Build Artifacts
+# ==========================================
+build/
+install/
+log/
+.colcon/
+.colcon_install_layout
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# ==========================================
+# ROS 2 Generated Files
+# ==========================================
+*.bag
+*.db3
+*.mcap
+*.sqlite3
+rosbag2_*/
+*.log
+
+# ==========================================
+# Gazebo Simulation
+# ==========================================
+.gazebo/
+.gz/
+*.world.lock
+*.sdf.lock
+
+# ==========================================
+# RViz
+# ==========================================
+*.rviz.bak
+
+# ==========================================
+# IDE / Editor
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# Temporary Files
+# ==========================================
+*.tmp
+*.temp
+*.bak
+*.orig
+*.out
+*.pid
+
+# ==========================================
+# Experiment Results / Temporary Data
+# ==========================================
+# Uncomment if you don't want to track generated results
+# results/raw/
+# results/temp/
+# plots/generated/
+
+# ==========================================
+# Environment Variables / Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+*credentials*
+*secret*
+
+# ==========================================
+# Coverage
+# ==========================================
+.coverage
+htmlcov/
+coverage.xml
+
+# ==========================================
+# vscode
+# ==========================================
+.vscode
