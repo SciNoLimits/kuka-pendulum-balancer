@@ -52,6 +52,7 @@ def generate_launch_description():
         ],
     )
 
+
     joint_state_spawner = Node(
         package="controller_manager",
         executable="spawner",

@@ -27,7 +27,7 @@
 
 		<geom name="floor" type="plane" size="0 0 .25" material="floor_mat" condim="3" />
 		
-		<attach model="kuka" body="lbr_link_1" prefix=""/>
+		<attach model="kuka" body="lbr_link_0" prefix=""/>
 	</worldbody>
 
 </mujoco>
