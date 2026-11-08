@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 1000
+    update_rate: 100
     use_sim_time: true
 
     joint_state_broadcaster:
@@ -12,8 +12,10 @@ controller_manager:
     mujoco_sensor_broadcaster:
       type: mujoco_sensors_broadcaster/MujocoSensorsBroadcaster
 
+
 joint_state_broadcaster:
   ros__parameters: {}
+
 
 iiwa_torque_controller:
   ros__parameters:
@@ -25,4 +27,5 @@ iiwa_torque_controller:
       - lbr_A5
       - lbr_A6
       - lbr_A7
+
     interface_name: effort
