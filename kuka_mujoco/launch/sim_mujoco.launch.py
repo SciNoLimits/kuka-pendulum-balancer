@@ -36,23 +36,22 @@ def generate_launch_description():
     control_node = Node(
         package="mujoco_ros2_control",
         executable="ros2_control_node",
-        name="controller_manager",
         output="both",
-        emulate_tty=True,
         parameters=[
+            robot_description,
             {"use_sim_time": True},
         ],
     )
 
-    joint_state_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        output="screen",
-    )
+    # joint_state_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     output="screen",
+    # )
 
 
     return LaunchDescription([
         robot_state_publisher,
         control_node,
-        joint_state_spawner,
+        # joint_state_spawner,
     ])
