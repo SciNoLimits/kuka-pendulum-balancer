@@ -9,6 +9,9 @@ controller_manager:
     iiwa_torque_controller:
       type: forward_command_controller/ForwardCommandController
 
+    mujoco_sensor_broadcaster:
+      type: mujoco_sensors_broadcaster/MujocoSensorsBroadcaster
+
 joint_state_broadcaster:
   ros__parameters: {}
 

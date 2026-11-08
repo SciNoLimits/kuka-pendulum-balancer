@@ -50,7 +50,7 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    
+
     <joint name="lbr_A7">
       <command_interface name="position"/>
       <state_interface name="position"/>

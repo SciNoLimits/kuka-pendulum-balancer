@@ -129,4 +129,22 @@
       <geom group="4" type="mesh"/>
     </default>
   </default>
+  <actuator>
+    <motor name="motor_A1" joint="lbr_A1" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A2" joint="lbr_A2" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A3" joint="lbr_A3" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A4" joint="lbr_A4" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A5" joint="lbr_A5" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A6" joint="lbr_A6" ctrlrange="-200 200" gear="1"/>
+    <motor name="motor_A7" joint="lbr_A7" ctrlrange="-200 200" gear="1"/>
+  </actuator>
+  <sensor>
+    <!-- 1. Force-Torque Sensor at the wrist to feel the pendulum's weight/inertial shifts -->
+    <force name="wrist_force_sensor" site="lbr_link_ee"/>
+    <torque name="wrist_torque_sensor" site="lbr_link_ee"/>
+
+    <!-- 2. Track the linear acceleration and angular velocity of the final link -->
+    <accelerometer name="ee_accel" site="lbr_link_ee"/>
+    <gyro name="ee_gyro" site="lbr_link_ee"/>
+  </sensor>
 </mujoco>
