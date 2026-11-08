@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
 project(kuka_mujoco)
 find_package(ament_cmake REQUIRED)
-install(DIRECTORY launch config urdf DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch config urdf mjcf DESTINATION share/${PROJECT_NAME})
 ament_package()

@@ -5,6 +5,6 @@
   <xacro:include filename="$(find lbr_iiwa14_r820_description)/urdf/lbr_iiwa14_r820.urdf.xacro"/>
 
   <!-- MuJoCo-specific ros2_control configuration -->
-  <!-- <xacro:include filename="$(find xxxxx_mujoco)/urdf/xxxxxxxxx_mujoco_control.xacro"/> -->
+  <xacro:include filename="$(find kuka_mujoco)/urdf/kuka_mujoco_control.xacro"/>
 
 </robot>
