@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<robot name="kuka_lbr_iiwa14_r820"
+       xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <ros2_control name="GazeboSystem" type="system">
+
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <!-- KUKA joint 1 -->
+    <joint name="lbr_A1">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 2 -->
+    <joint name="lbr_A2">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 3 -->
+    <joint name="lbr_A3">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 4 -->
+    <joint name="lbr_A4">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 5 -->
+    <joint name="lbr_A5">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 6 -->
+    <joint name="lbr_A6">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- KUKA joint 7 -->
+    <joint name="lbr_A7">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- Passive pendulum joint -->
+    <joint name="pendulum_joint">
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+  </ros2_control>
+
+  <!-- Gazebo Sim ros2_control plugin -->
+  <gazebo>
+    <plugin filename="gz_ros2_control-system"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+
+      <parameters>
+        $(find kuka_gazebo)/config/controllers.yaml
+      </parameters>
+
+    </plugin>
+  </gazebo>
+
+</robot>

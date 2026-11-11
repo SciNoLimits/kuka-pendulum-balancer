@@ -230,9 +230,6 @@
   <ros2_control name="MujocoSystem" type="system">
     <hardware>
       <plugin>mujoco_ros2_control/MujocoSystemInterface</plugin>
-      <!-- <param name="mujoco_model">$(find moment_mujoco)/models/moment_warehouse_scene.xml</param>
-      <param name="headless">false</param>
-      <param name="sim_speed_factor">1.0</param> -->
     </hardware>
     <joint name="lbr_A1">
       <command_interface name="position"/>

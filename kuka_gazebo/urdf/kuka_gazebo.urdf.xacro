@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="kuka_lbr_iiwa14_r820" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Shared robot model -->
+  <xacro:include filename="$(find lbr_iiwa14_r820_description)/urdf/lbr_iiwa14_r820.urdf.xacro"/>
+
+  <!-- Gazebo-specific ros2_control configuration -->
+  <xacro:include filename="$(find kuka_gazebo)/urdf/kuka_gazebo_control.xacro"/>
+
+</robot>
