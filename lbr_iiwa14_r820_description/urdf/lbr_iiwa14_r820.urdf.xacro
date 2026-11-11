@@ -6,6 +6,9 @@
     <!-- include the iiwa 14 R820 macro -->
     <xacro:include filename="$(find lbr_iiwa14_r820_description)/urdf/lbr_iiwa14_r820_macro.xacro" />
 
+    <!-- Include pendulum description -->
+    <xacro:include filename="$(find pendulum_description)/urdf/pendulum.urdf.xacro" />
+
     <!-- arguments -->
     <xacro:arg name="robot_name" default="lbr" />
     <xacro:arg
@@ -16,4 +19,8 @@
     <xacro:lbr_iiwa14_r820
         robot_name="$(arg robot_name)"
         joint_limits_path="$(arg joint_limits_path)" />
+
+    <!-- Attach pendulum to KUKA end-effector -->
+    <xacro:pendulum parent="$(arg robot_name)_link_ee" />
+    
 </robot>

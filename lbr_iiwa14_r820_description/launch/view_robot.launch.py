@@ -7,6 +7,7 @@ from launch.substitutions import (
     PathSubstitution,
 )
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -25,18 +26,21 @@ def generate_launch_description() -> LaunchDescription:
                 output="screen",
                 parameters=[
                     {
-                        "robot_description": Command(
-                            [
-                                FindExecutable(name="xacro"),
-                                " ",
-                                PathSubstitution(
-                                    FindPackageShare("lbr_iiwa14_r820_description")
-                                )
-                                / "urdf"
-                                / "lbr_iiwa14_r820.urdf.xacro",
-                                " robot_name:=",
-                                LaunchConfiguration("robot_name"),
-                            ]
+                        "robot_description": ParameterValue(
+                            Command(
+                                [
+                                    FindExecutable(name="xacro"),
+                                    " ",
+                                    PathSubstitution(
+                                        FindPackageShare("lbr_iiwa14_r820_description")
+                                    )
+                                    / "urdf"
+                                    / "lbr_iiwa14_r820.urdf.xacro",
+                                    " robot_name:=",
+                                    LaunchConfiguration("robot_name"),
+                                ]
+                            ),
+                            value_type=str,
                         )
                     },
                 ],

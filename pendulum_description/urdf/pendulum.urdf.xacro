@@ -1,141 +1,121 @@
 <?xml version="1.0"?>
-
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-  <!-- ================================= -->
-  <!-- SINGLE DOF PENDULUM MACRO         -->
-  <!-- ================================= -->
-
-  <xacro:macro name="pendulum" params="parent prefix:=pendulum_">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="single_dof_pendulum">
 
     <!-- ================================= -->
-    <!-- PENDULUM: RIGID MOVING LINK       -->
+    <!-- XACRO PROPERTIES (CONSTANTS)      -->
     <!-- ================================= -->
 
-    <link name="${prefix}link">
+    <!-- Material Colors -->
+    <xacro:property name="color_pivot" value="0.40 0.43 0.48 1" />
+    <xacro:property name="color_pendulum" value="0.68 0.70 0.74 1" />
+    <xacro:property name="color_bob" value="1.00 0.40 0.02 1" />
 
-      <!-- Inertial properties -->
-      <inertial>
-        <origin xyz="0 0 -0.23" rpy="0 0 0"/>
-
-        <mass value="0.22"/>
-
-        <inertia
-          ixx="0.0038"
-          ixy="0"
-          ixz="0"
-          iyy="0.0038"
-          iyz="0"
-          izz="0.00002"/>
-      </inertial>
-
-
-      <!-- ================================= -->
-      <!-- CONNECTING HUB AT THE PIVOT      -->
-      <!-- ================================= -->
-
-      <visual>
-        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
-
-        <geometry>
-          <cylinder radius="0.015" length="0.015"/>
-        </geometry>
-
-        <material name="pendulum_hub_material">
-          <color rgba="0.68 0.70 0.74 1"/>
-        </material>
-      </visual>
-
-      <collision>
-        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
-
-        <geometry>
-          <cylinder radius="0.015" length="0.015"/>
-        </geometry>
-      </collision>
-
-
-      <!-- ================================= -->
-      <!-- METALLIC PENDULUM ROD             -->
-      <!-- ================================= -->
-
-      <visual>
-        <origin xyz="0 0 -0.23" rpy="0 0 0"/>
-
-        <geometry>
-          <cylinder radius="0.009" length="0.46"/>
-        </geometry>
-
-        <material name="pendulum_rod_material">
-          <color rgba="0.68 0.70 0.74 1"/>
-        </material>
-      </visual>
-
-      <collision>
-        <origin xyz="0 0 -0.23" rpy="0 0 0"/>
-
-        <geometry>
-          <cylinder radius="0.009" length="0.46"/>
-        </geometry>
-      </collision>
-
-
-      <!-- ================================= -->
-      <!-- SPHERICAL PENDULUM BOB            -->
-      <!-- ================================= -->
-
-      <visual>
-        <origin xyz="0 0 -0.46" rpy="0 0 0"/>
-
-        <geometry>
-          <sphere radius="0.03"/>
-        </geometry>
-
-        <material name="pendulum_bob_material">
-          <color rgba="1.0 0.40 0.02 1"/>
-        </material>
-      </visual>
-
-      <collision>
-        <origin xyz="0 0 -0.46" rpy="0 0 0"/>
-
-        <geometry>
-          <sphere radius="0.03"/>
-        </geometry>
-      </collision>
-
-    </link>
-
+    <!-- Pendulum Dimensions -->
+    <xacro:property name="rod_length" value="0.46" />
+    <xacro:property name="rod_radius" value="0.009" />
+    <xacro:property name="bob_radius" value="0.03" />
+    <xacro:property name="hub_length" value="0.03" />
+    <xacro:property name="hub_radius" value="0.015" />
 
     <!-- ================================= -->
-    <!-- SINGLE REVOLUTE JOINT             -->
+    <!-- SINGLE DOF PENDULUM MACRO         -->
     <!-- ================================= -->
+    <xacro:macro name="pendulum" params="parent">
 
-    <joint name="${prefix}joint" type="revolute">
+        <!-- ================================= -->
+        <!-- PENDULUM: RIGID MOVING LINK       -->
+        <!-- ================================= -->
+        <link name="pendulum_link">
 
-      <parent link="${parent}"/>
-      <child link="${prefix}link"/>
+            <!-- Inertial properties shifted along the X-axis -->
+            <inertial>
+                <origin xyz="${rod_length/2} 0 0" rpy="0 0 0" />
+                <mass value="0.22" />
+                <inertia
+                    ixx="0.00002" ixy="0" ixz="0"
+                    iyy="0.0038" iyz="0"
+                    izz="0.0038" />
+            </inertial>
 
-      <!-- Joint located at the pendulum pivot -->
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+            <!-- Connecting Hub (Cylinder oriented vertically along Z-axis) -->
+            <visual>
+                <origin xyz="0 0 ${hub_length/2}" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="${hub_radius}" length="${hub_length}" />
+                </geometry>
+                <material name="pendulum_hub_material">
+                    <color rgba="${color_pendulum}" />
+                </material>
+            </visual>
 
-      <!-- Rotation axis -->
-      <axis xyz="0 1 0"/>
+            <collision>
+                <origin xyz="0 0 ${hub_length/2}" rpy="0 0 0" />
+                <geometry>
+                    <cylinder radius="${hub_radius}" length="${hub_length}" />
+                </geometry>
+            </collision>
 
-      <!-- Joint limits -->
-      <limit
-        lower="-3.14159"
-        upper="3.14159"
-        effort="10"
-        velocity="10"/>
+            <!-- Metallic Pendulum Rod (Rotated 90 deg about Y, extending along X) -->
+            <visual>
+                <origin xyz="${rod_length/2} 0 0" rpy="0 ${pi/2} 0" />
+                <geometry>
+                    <cylinder radius="${rod_radius}" length="${rod_length}" />
+                </geometry>
+                <material name="pendulum_rod_material">
+                    <color rgba="${color_pendulum}" />
+                </material>
+            </visual>
 
-      <!-- Joint dynamics -->
-      <dynamics
-        damping="0.002"
-        friction="0.0005"/>
+            <collision>
+                <origin xyz="${rod_length/2} 0 0" rpy="0 ${pi/2} 0" />
+                <geometry>
+                    <cylinder radius="${rod_radius}" length="${rod_length}" />
+                </geometry>
+            </collision>
 
-    </joint>
+            <!-- Spherical Pendulum Bob (Placed at the end of the rod along X) -->
+            <visual>
+                <origin xyz="${rod_length} 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="${bob_radius}" />
+                </geometry>
+                <material name="pendulum_bob_material">
+                    <color rgba="${color_bob}" />
+                </material>
+            </visual>
 
-  </xacro:macro>
+            <collision>
+                <origin xyz="${rod_length} 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="${bob_radius}" />
+                </geometry>
+            </collision>
+
+        </link>
+
+
+        <!-- ================================= -->
+        <!-- SINGLE REVOLUTE JOINT             -->
+        <!-- ================================= -->
+        <joint name="pendulum_joint" type="revolute">
+            <parent link="${parent}" />
+            <child link="pendulum_link" />
+
+            <!-- Joint frame aligned with parent -->
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <axis xyz="0 0 1" />
+
+            <limit
+                lower="-${pi}"
+                upper="${pi}"
+                effort="10"
+                velocity="10" />
+
+            <dynamics
+                damping="0.002"
+                friction="0.0005" />
+        </joint>
+
+    </xacro:macro>
 
 </robot>
