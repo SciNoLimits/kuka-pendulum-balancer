@@ -14,7 +14,7 @@
     <xacro:property name="rod_length" value="0.46" />
     <xacro:property name="rod_radius" value="0.009" />
     <xacro:property name="bob_radius" value="0.03" />
-    <xacro:property name="hub_length" value="0.03" />
+    <xacro:property name="hub_length" value="0.025" />
     <xacro:property name="hub_radius" value="0.015" />
 
     <!-- ================================= -->
@@ -27,9 +27,9 @@
         <!-- ================================= -->
         <link name="pendulum_link">
 
-            <!-- Inertial properties shifted along the X-axis -->
+            <!-- Inertial properties shifted down by rod_radius -->
             <inertial>
-                <origin xyz="${rod_length/2} 0 0" rpy="0 0 0" />
+                <origin xyz="${rod_length/2} 0 ${hub_length - rod_radius}" rpy="0 0 0" />
                 <mass value="0.22" />
                 <inertia
                     ixx="0.00002" ixy="0" ixz="0"
@@ -37,7 +37,7 @@
                     izz="0.0038" />
             </inertial>
 
-            <!-- Connecting Hub (Cylinder oriented vertically along Z-axis) -->
+            <!-- Connecting Hub -->
             <visual>
                 <origin xyz="0 0 ${hub_length/2}" rpy="0 0 0" />
                 <geometry>
@@ -55,9 +55,9 @@
                 </geometry>
             </collision>
 
-            <!-- Metallic Pendulum Rod (Rotated 90 deg about Y, extending along X) -->
+            <!-- Metallic Pendulum Rod (Centerline at hub_length - rod_radius) -->
             <visual>
-                <origin xyz="${rod_length/2} 0 0" rpy="0 ${pi/2} 0" />
+                <origin xyz="${rod_length/2} 0 ${hub_length - rod_radius}" rpy="0 ${pi/2} 0" />
                 <geometry>
                     <cylinder radius="${rod_radius}" length="${rod_length}" />
                 </geometry>
@@ -67,15 +67,15 @@
             </visual>
 
             <collision>
-                <origin xyz="${rod_length/2} 0 0" rpy="0 ${pi/2} 0" />
+                <origin xyz="${rod_length/2} 0 ${hub_length - rod_radius}" rpy="0 ${pi/2} 0" />
                 <geometry>
                     <cylinder radius="${rod_radius}" length="${rod_length}" />
                 </geometry>
             </collision>
 
-            <!-- Spherical Pendulum Bob (Placed at the end of the rod along X) -->
+            <!-- Spherical Pendulum Bob (Centerline at hub_length - rod_radius) -->
             <visual>
-                <origin xyz="${rod_length} 0 0" rpy="0 0 0" />
+                <origin xyz="${rod_length} 0 ${hub_length - rod_radius}" rpy="0 0 0" />
                 <geometry>
                     <sphere radius="${bob_radius}" />
                 </geometry>
@@ -85,7 +85,7 @@
             </visual>
 
             <collision>
-                <origin xyz="${rod_length} 0 0" rpy="0 0 0" />
+                <origin xyz="${rod_length} 0 ${hub_length - rod_radius}" rpy="0 0 0" />
                 <geometry>
                     <sphere radius="${bob_radius}" />
                 </geometry>
