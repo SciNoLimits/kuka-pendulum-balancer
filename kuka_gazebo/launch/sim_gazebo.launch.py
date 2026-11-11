@@ -40,7 +40,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(gazebo_launch),
         launch_arguments={"gz_args": ["-r -v 3 ", world]}.items())
     spawn = Node(package="ros_gz_sim", executable="create", arguments=[
-        "-name", "kuka", "-topic", "robot_description", "-x", "0", "-y", "0", "-z", "0.15"
+        "-name", "kuka", "-topic", "robot_description", "-x", "0", "-y", "0", "-z", "0"
     ], output="screen")
     bridge = Node(package="ros_gz_bridge", executable="parameter_bridge", output="screen")
     jsb = Node(package="controller_manager", executable="spawner",

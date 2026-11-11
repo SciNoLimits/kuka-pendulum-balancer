@@ -7,4 +7,13 @@
   <!-- Gazebo-specific ros2_control configuration -->
   <xacro:include filename="$(find kuka_gazebo)/urdf/kuka_gazebo_control.xacro"/>
 
+  <!-- Fix KUKA base to Gazebo world -->
+  <link name="world"/>
+
+  <joint name="world_to_kuka_base" type="fixed">
+    <parent link="world"/>
+    <child link="lbr_link_0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
 </robot>
